@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "safejoin",
+	"version": "${version}",
+	"name": "Civ GroupChat SafeJoin",
+	"description": "Join your groupchat safely on startup!",
+	"authors": [
+		"Scouter9001"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/civgroupchatsafejoin/icon.png",
+	"environment": "*",
+	"entrypoints": {
+	    "client": [
+	      "com.civ.groupchat.safejoin.SafeJoin"
+	    ],
+	    "modmenu": [
+	      "com.civ.groupchat.safejoin.config.ModMenuImpl"
+	    ]
+	},
+	"mixins": [],
+	"depends": {
+		"fabricloader": ">=0.14.6",
+		"fabric": "*",
+		"minecraft": "~1.18.2",
+		"java": ">=17"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
