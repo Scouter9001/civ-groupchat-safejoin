@@ -1,5 +1,6 @@
 package com.civ.groupchat.safejoin.config;
 
+import com.civ.groupchat.safejoin.SafeJoin;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.fabricmc.loader.api.FabricLoader;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ModConfig {
 
@@ -18,8 +21,11 @@ public class ModConfig {
 	
 	private String defaultGroup;
 
+	public static final Logger LOGGER = LoggerFactory.getLogger(SafeJoin.MODID);
+
     public ModConfig() {
         this.file = FabricLoader.getInstance().getConfigDir().resolve("civgroupsafejoin.json").toFile();
+        LOGGER.info(file.toString());
         this.defaultGroup = "your group";
     }
 
@@ -32,6 +38,9 @@ public class ModConfig {
     public void load() {
         try {
             String json = new String(Files.readAllBytes(this.file.toPath()));
+            
+            LOGGER.info(json);
+            
             if (!json.equals("")) {
                 
                 JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();                
@@ -45,7 +54,7 @@ public class ModConfig {
 
     public void save() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("defaultGroup", "your group");
+        jsonObject.addProperty("defaultGroup", this.defaultGroup);
 
         try (PrintWriter out = new PrintWriter(file)) {
             out.println(jsonObject.toString());
